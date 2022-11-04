@@ -34,8 +34,7 @@ import Skill from './model/Skill';
 import cors from 'cors';
 
 const allowlist = [
-	'https://educaretech.org',
-	'https://www.educaretech.org',
+	'https://admin.educaretech.org',
 	'http://localhost:3000',
 	'http://localhost:3001',
 ];
