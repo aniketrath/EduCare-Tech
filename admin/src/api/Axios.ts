@@ -2,7 +2,7 @@ import axios from 'axios';
 import store from '../store/store';
 import { showAlert } from '../store/UtilsReducer';
 
-const ServerURL = 'http://localhost:9001/';
+const ServerURL = 'https://adminapi.educaretech.org/';
 
 const Axios = axios.create({
 	baseURL: ServerURL,

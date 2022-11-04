@@ -13,7 +13,7 @@ node_modules/
 /build
 
 
-
+.env
 **/static/**/*.log
 **/static/**/*.pdf
 **/static/**/*.jpg

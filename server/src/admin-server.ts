@@ -33,7 +33,12 @@ import Skill from './model/Skill';
 
 import cors from 'cors';
 
-const allowlist = ['http://localhost:3001'];
+const allowlist = [
+	'https://educaretech.org',
+	'https://www.educaretech.org',
+	'http://localhost:3000',
+	'http://localhost:3001',
+];
 
 const corsOptionsDelegate = (req: Request, callback: any): void => {
 	const corsOptions = { origin: false, credentials: false };
