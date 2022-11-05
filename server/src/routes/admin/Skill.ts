@@ -13,9 +13,9 @@ const skillsRouter = Router();
 
 skillsRouter.route('/all').all(VerifyAdmin).get(AllSkills);
 skillsRouter.route('/create').all(VerifyAdmin).post(CreateSkill);
-skillsRouter.route('/delete/:id').all(VerifyAdmin).delete(DeleteSkillByID);
+skillsRouter.route('/delete/:id').all(VerifyAdmin).post(DeleteSkillByID);
 skillsRouter.route('/add-resources/:id').all(VerifyAdmin).post(AddResources);
-skillsRouter.route('/delete-resource/:id/:resourceID').all(VerifyAdmin).delete(DeleteResourceByID);
+skillsRouter.route('/delete-resource/:id/:resourceID').all(VerifyAdmin).post(DeleteResourceByID);
 skillsRouter.route('/skills/:id').all(VerifyAdmin).get(SkillById);
 
 export default skillsRouter;
