@@ -58,13 +58,13 @@ export default function Landing() {
 							<Text className='text-5xl font-bold'>through Technology</Text>
 						</Box>
 						<Box className='text-dark mt-[7%]'>
-							<Text>
-								Reprehenderit duis minim nulla ea duis esse sunt laboris excepteur cupidatat qui
-								sunt mollit. Ullamco ipsum sit nulla excepteur magna laboris enim enim nostrud
-								nulla. Culpa cillum laborum est id. Ea nostrud cupidatat elit occaecat sunt culpa
-								minim do enim velit. Magna dolor exercitation elit eu cupidatat reprehenderit
-								mollit. Amet officia ea laboris non veniam aliquip nostrud sint ut. Enim nisi
-								cupidatat ullamco irure eiusmod reprehenderit in ut irure ullamco deserunt.
+							<Text className='text-lg'>
+								Learning is something that takes place daily by interacting with other people and
+								the world around us. Life often throws challenges at us, there may be hurdles to
+								overcome, sometimes we compare ourselves with others who perform better than us, but
+								one should never get demotivated. All these obstacles should not hinder our
+								development of a lifelong learning process. It enhances our perspective towards the
+								world to get better opportunities, thus improving our quality of life.
 							</Text>
 						</Box>
 					</Box>
@@ -81,7 +81,7 @@ export default function Landing() {
 			<Box className=' px-[7%] py-[7%] bg-primary-dark'>
 				<Text className='text-4xl font-bold'>Mission</Text>
 				<Box className='text-dark mt-[3%]'>
-					<Text>
+					<Text className='text-lg'>
 						Our platform aims for the children of deprived backgrounds to avail all opportunities to
 						grow equally like others , and also for the elderly to be technically self-sufficient ,
 						to connect , and be a part of the digital world in this modern era . We aim to spread
@@ -96,7 +96,7 @@ export default function Landing() {
 			<Box className=' px-[7%] py-[7%]'>
 				<Text className='text-4xl font-bold'>Vision</Text>
 				<Box className='text-dark mt-[3%]'>
-					<Text>
+					<Text className='text-lg'>
 						Provide necessary support for children to grow in education, confidence and skills to
 						achieve their goal. Extend support to the elderly to carry out day to day digital
 						activities in the modern society We will be here for you every step of the way. Our
@@ -111,7 +111,7 @@ export default function Landing() {
 			<Box className=' px-[7%] py-[7%] bg-primary-dark'>
 				<Text className='text-4xl font-bold'>About</Text>
 				<Box className='text-dark mt-[3%]'>
-					<Text>
+					<Text className='text-lg'>
 						An educational consultant, also called a higher education consultant, assists students
 						and their parents in planning for college and financial aid. EduCareTech is a digital
 						education support system working towards uplifting literacy and skills in deprived
