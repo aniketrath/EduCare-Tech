@@ -9,5 +9,6 @@ const VerifyAdmin_1 = __importDefault(require("../../middleware/VerifyAdmin"));
 const collectionsRouter = (0, express_1.Router)();
 collectionsRouter.route('/all').all(VerifyAdmin_1.default).get(Collection_1.AllCollections);
 collectionsRouter.route('/create').all(VerifyAdmin_1.default).post(Collection_1.CreateCollection);
+collectionsRouter.route('/delete/:id').all(VerifyAdmin_1.default).post(Collection_1.DeleteCollection);
 exports.default = collectionsRouter;
 //# sourceMappingURL=Collection.js.map

@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateCollection = exports.AllCollections = void 0;
+exports.DeleteCollection = exports.CreateCollection = exports.AllCollections = void 0;
 const Collection_1 = __importDefault(require("../../model/Collection"));
 const FileUpload_1 = __importDefault(require("../../utils/FileUpload"));
 const AllCollections = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -22,8 +22,16 @@ const AllCollections = (req, res) => __awaiter(void 0, void 0, void 0, function*
     const pdfs = collections.filter((collection) => collection.type === 'PDF');
     const videos = collections.filter((collection) => collection.type === 'VIDEO');
     return result(res, 200, {
-        pdfs,
-        videos,
+        pdfs: pdfs.map((pdf) => ({
+            id: pdf._id,
+            title: pdf.title,
+            link: pdf.link,
+        })) || [],
+        videos: videos.map((video) => ({
+            id: video._id,
+            title: video.title,
+            link: video.link,
+        })) || [],
     });
 });
 exports.AllCollections = AllCollections;
@@ -57,6 +65,15 @@ const CreateCollection = (req, res) => __awaiter(void 0, void 0, void 0, functio
     return result(res, 200, 'Collection created successfully');
 });
 exports.CreateCollection = CreateCollection;
+const DeleteCollection = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const collection = yield Collection_1.default.findById(id);
+    if (!collection || !collection.alone)
+        return result(res, 404, 'Collection not found');
+    yield collection.delete();
+    return result(res, 200, 'Collection deleted successfully');
+});
+exports.DeleteCollection = DeleteCollection;
 const result = (res, status, data) => {
     res.status(status).json(data);
 };

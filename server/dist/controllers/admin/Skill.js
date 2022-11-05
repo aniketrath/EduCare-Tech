@@ -12,18 +12,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DeleteSkillByID = exports.AddResources = exports.CreateSkill = exports.SkillById = exports.AllSkills = void 0;
+exports.DeleteResourceByID = exports.DeleteSkillByID = exports.AddResources = exports.CreateSkill = exports.SkillById = exports.AllSkills = void 0;
 const Collection_1 = __importDefault(require("../../model/Collection"));
 const Skill_1 = __importDefault(require("../../model/Skill"));
 const FileUpload_1 = __importDefault(require("../../utils/FileUpload"));
 const AllSkills = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const skills = yield Skill_1.default.find();
+    const skills = yield Skill_1.default.find().populate('pdfs videos');
     return result(res, 200, skills.map((skill) => ({
         id: skill._id,
         title: skill.title,
         photo: skill.photo,
-        pdfs: skill.pdfs || [],
-        videos: skill.videos || [],
+        pdfs: skill.pdfs.map((pdf) => ({
+            id: pdf._id,
+            title: pdf.title,
+            link: pdf.link,
+        })) || [],
+        videos: skill.videos.map((video) => ({
+            id: video._id,
+            title: video.title,
+            link: video.link,
+        })) || [],
     })));
 });
 exports.AllSkills = AllSkills;
@@ -37,8 +45,16 @@ const SkillById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     return result(res, 200, {
         name: skill.title,
         photo: skill.photo,
-        pdfs: skill.pdfs,
-        videos: skill.videos,
+        pdfs: skill.pdfs.map((pdf) => ({
+            id: pdf._id,
+            title: pdf.title,
+            link: pdf.link,
+        })) || [],
+        videos: skill.videos.map((video) => ({
+            id: video._id,
+            title: video.title,
+            link: video.link,
+        })) || [],
     });
 });
 exports.SkillById = SkillById;
@@ -129,9 +145,33 @@ const DeleteSkillByID = (req, res) => __awaiter(void 0, void 0, void 0, function
     const skill = yield Skill_1.default.findById(id);
     if (!skill)
         return result(res, 404, 'Skill not found');
-    yield Skill_1.default.findByIdAndDelete(id);
+    yield skill.remove();
+    return result(res, 200, 'Skill deleted successfully');
 });
 exports.DeleteSkillByID = DeleteSkillByID;
+const DeleteResourceByID = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id, resourceID } = req.params;
+    if (!id)
+        return result(res, 400, 'Skill id is required');
+    const skill = yield Skill_1.default.findById(id);
+    const resource = yield Collection_1.default.findById(resourceID);
+    if (!skill) {
+        return result(res, 404, 'Program not found');
+    }
+    else if (!resource) {
+        return result(res, 404, 'Resource not found');
+    }
+    if (resource.type === 'PDF') {
+        skill.pdfs = skill.pdfs.filter((pdf) => pdf.toString() !== resourceID);
+    }
+    else {
+        skill.videos = skill.videos.filter((video) => video.toString() !== resourceID);
+    }
+    yield skill.save();
+    yield resource.remove();
+    return result(res, 200, 'Resource deleted successfully');
+});
+exports.DeleteResourceByID = DeleteResourceByID;
 const result = (res, status, data) => {
     res.status(status).json(data);
 };

@@ -37,7 +37,12 @@ const User_1 = __importDefault(require("./model/User"));
 const Skill_1 = __importDefault(require("./model/Skill"));
 // ----------------------------------------------------CORS
 const cors_1 = __importDefault(require("cors"));
-const allowlist = ['http://localhost:3000'];
+const allowlist = [
+    'https://educaretech.org',
+    'https://www.educaretech.org',
+    'http://localhost:3000',
+    'http://localhost:3001',
+];
 const corsOptionsDelegate = (req, callback) => {
     const corsOptions = { origin: false, credentials: false };
     const isDomainAllowed = allowlist.includes(req.header('Origin') || '');

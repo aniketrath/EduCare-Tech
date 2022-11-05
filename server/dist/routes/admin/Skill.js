@@ -9,7 +9,9 @@ const VerifyAdmin_1 = __importDefault(require("../../middleware/VerifyAdmin"));
 const skillsRouter = (0, express_1.Router)();
 skillsRouter.route('/all').all(VerifyAdmin_1.default).get(Skill_1.AllSkills);
 skillsRouter.route('/create').all(VerifyAdmin_1.default).post(Skill_1.CreateSkill);
+skillsRouter.route('/delete/:id').all(VerifyAdmin_1.default).delete(Skill_1.DeleteSkillByID);
 skillsRouter.route('/add-resources/:id').all(VerifyAdmin_1.default).post(Skill_1.AddResources);
+skillsRouter.route('/delete-resource/:id/:resourceID').all(VerifyAdmin_1.default).delete(Skill_1.DeleteResourceByID);
 skillsRouter.route('/skills/:id').all(VerifyAdmin_1.default).get(Skill_1.SkillById);
 exports.default = skillsRouter;
 //# sourceMappingURL=Skill.js.map

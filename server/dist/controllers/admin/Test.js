@@ -14,68 +14,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateTest = exports.DeleteQuestion = exports.SaveQuestion = exports.TestResponses = exports.TestDetails = exports.CreateTest = exports.AllTests = void 0;
 const Test_1 = __importDefault(require("../../model/Test"));
-const moment_1 = __importDefault(require("moment"));
+// import moment from 'moment';
 const Result_1 = __importDefault(require("../../model/Result"));
 const Question_1 = __importDefault(require("../../model/Question"));
 const AllTests = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const startsAt = (0, moment_1.default)();
-    startsAt.subtract(3, 'month');
-    const endsAt = (0, moment_1.default)();
-    endsAt.add(3, 'month');
-    const tests = yield Test_1.default.find({
-        startsAt: { $gte: startsAt.toDate() },
-    }).sort({ createdAt: 1 });
-    const _upcoming = tests.filter((test) => (0, moment_1.default)(test.startsAt).isAfter((0, moment_1.default)()));
-    let _ongoing = tests.filter((test) => (0, moment_1.default)(test.startsAt).isBefore((0, moment_1.default)()) && (0, moment_1.default)(test.endsAt).isAfter((0, moment_1.default)()));
-    let _past = tests.filter((test) => (0, moment_1.default)(test.endsAt).isBefore((0, moment_1.default)()));
-    const results = yield Result_1.default.find({
-        $and: [{ user: req.user._id }, { test: { $in: tests.map((test) => test._id) } }],
-    });
-    const upcoming = _upcoming.map((test) => ({
+    const tests = yield Test_1.default.find().sort({ createdAt: 1 });
+    return result(res, 200, tests.map((test) => ({
         id: test._id,
         title: test.title,
-        isCompleted: false,
-    }));
-    const ongoing = _ongoing.map((test) => ({
-        id: test._id,
-        title: test.title,
-        isCompleted: results.some((result) => { var _a; return ((_a = result.test) === null || _a === void 0 ? void 0 : _a.toString()) === test._id.toString(); }),
-    }));
-    const past = _past.map((test) => ({
-        id: test._id,
-        title: test.title,
-        isCompleted: results.some((result) => { var _a; return ((_a = result.test) === null || _a === void 0 ? void 0 : _a.toString()) === test._id.toString(); }),
-    }));
-    return result(res, 200, {
-        past,
-        upcoming,
-        ongoing,
-    });
+    })));
 });
 exports.AllTests = AllTests;
 const CreateTest = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { title, startDate, endDate, time } = req.body;
-    const momentStartsAt = (0, moment_1.default)(startDate, 'DD-MM-YYYY');
-    const momentEndsAt = (0, moment_1.default)(endDate, 'DD-MM-YYYY');
-    if (!momentStartsAt.isValid() || !momentEndsAt.isValid()) {
-        return result(res, 400, 'Invalid date format');
-    }
-    else if (momentStartsAt.isAfter(momentEndsAt)) {
-        return result(res, 400, 'Start date cannot be after end date');
-    }
-    else if (momentStartsAt.isBefore((0, moment_1.default)())) {
-        return result(res, 400, 'Start date cannot be before today');
-    }
-    else if (momentEndsAt.isBefore((0, moment_1.default)())) {
-        return result(res, 400, 'End date cannot be before today');
-    }
-    else if (momentEndsAt.isSame(momentStartsAt)) {
-        return result(res, 400, 'Start date and end date cannot be the same');
-    }
+    const { title, time } = req.body;
     const test = new Test_1.default({
         title,
-        startsAt: momentStartsAt.toDate(),
-        endsAt: momentEndsAt.toDate(),
         time: time * 60 * 1000,
     });
     try {
@@ -99,8 +52,6 @@ const TestDetails = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         return result(res, 404, 'Test not found');
     return result(res, 200, {
         title: test.title,
-        startDate: (0, moment_1.default)(test.startsAt).format('DD/MM/YYYY'),
-        endDate: (0, moment_1.default)(test.endsAt).format('DD/MM/YYYY'),
         time: test.time / (60 * 1000),
         questions: test.questions.map((question) => ({
             id: question._id,
@@ -174,31 +125,12 @@ const DeleteQuestion = (req, res) => __awaiter(void 0, void 0, void 0, function*
 exports.DeleteQuestion = DeleteQuestion;
 const UpdateTest = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { testID } = req.params;
-    const { title, startDate, endDate, questions, time } = req.body;
-    const momentStartsAt = (0, moment_1.default)(startDate, 'DD-MM-YYYY');
-    const momentEndsAt = (0, moment_1.default)(endDate, 'DD-MM-YYYY');
-    if (!momentStartsAt.isValid() || !momentEndsAt.isValid()) {
-        return result(res, 400, 'Invalid date format');
-    }
-    else if (momentStartsAt.isAfter(momentEndsAt)) {
-        return result(res, 400, 'Start date cannot be after end date');
-    }
-    else if (momentStartsAt.isBefore((0, moment_1.default)())) {
-        return result(res, 400, 'Start date cannot be before today');
-    }
-    else if (momentEndsAt.isBefore((0, moment_1.default)())) {
-        return result(res, 400, 'End date cannot be before today');
-    }
-    else if (momentEndsAt.isSame(momentStartsAt)) {
-        return result(res, 400, 'Start date and end date cannot be the same');
-    }
+    const { title, questions, time } = req.body;
     const test = yield Test_1.default.findById(testID);
     if (!test)
         return result(res, 404, 'Test not found');
     const _questions = yield Question_1.default.find({ _id: { $in: questions.map((q) => q.id) } });
     test.title = title;
-    test.startsAt = momentStartsAt.toDate();
-    test.endsAt = momentEndsAt.toDate();
     test.questions = _questions;
     test.time = time * 60 * 1000;
     test.save();

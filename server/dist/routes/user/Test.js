@@ -10,6 +10,6 @@ const testRouter = (0, express_1.Router)();
 testRouter.route('/all').all(VerifyUser_1.default).get(Test_1.AllTests);
 testRouter.route('/test/:testID').all(VerifyUser_1.default).get(Test_1.TestByID);
 testRouter.route('/submit/:testID').all(VerifyUser_1.default).post(Test_1.SubmitTest);
-testRouter.route('/result/:testID').all(VerifyUser_1.default).get(Test_1.ResultTest);
+// testRouter.route('/result/:testID').all(VerifyUser).get(ResultTest);
 exports.default = testRouter;
 //# sourceMappingURL=Test.js.map

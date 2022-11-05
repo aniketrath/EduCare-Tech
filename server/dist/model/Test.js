@@ -6,8 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const TestSchema = new mongoose_1.default.Schema({
     title: { type: String },
-    startsAt: { type: Date },
-    endsAt: { type: Date },
     questions: [
         {
             type: mongoose_1.default.Schema.Types.ObjectId,

@@ -9,7 +9,9 @@ const VerifyAdmin_1 = __importDefault(require("../../middleware/VerifyAdmin"));
 const programsRouter = (0, express_1.Router)();
 programsRouter.route('/all').all(VerifyAdmin_1.default).get(Program_1.AllPrograms);
 programsRouter.route('/create').all(VerifyAdmin_1.default).post(Program_1.CreateProgram);
+programsRouter.route('/delete/:id').all(VerifyAdmin_1.default).post(Program_1.DeleteProgramByID);
 programsRouter.route('/add-resources/:id').all(VerifyAdmin_1.default).post(Program_1.AddResources);
+programsRouter.route('/delete-resource/:id/:resourceID').all(VerifyAdmin_1.default).post(Program_1.DeleteResourceByID);
 programsRouter.route('/programs/:id').all(VerifyAdmin_1.default).get(Program_1.ProgramById);
 exports.default = programsRouter;
 //# sourceMappingURL=Program.js.map

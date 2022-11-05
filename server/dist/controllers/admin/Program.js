@@ -12,18 +12,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DeleteProgramByID = exports.AddResources = exports.CreateProgram = exports.ProgramById = exports.AllPrograms = void 0;
+exports.DeleteResourceByID = exports.DeleteProgramByID = exports.AddResources = exports.CreateProgram = exports.ProgramById = exports.AllPrograms = void 0;
 const Collection_1 = __importDefault(require("../../model/Collection"));
 const Program_1 = __importDefault(require("../../model/Program"));
 const FileUpload_1 = __importDefault(require("../../utils/FileUpload"));
 const AllPrograms = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const programs = yield Program_1.default.find();
+    const programs = yield Program_1.default.find().populate('pdfs videos');
     return result(res, 200, programs.map((program) => ({
         id: program._id,
         title: program.title,
         photo: program.photo,
-        pdfs: program.pdfs || [],
-        videos: program.videos || [],
+        pdfs: program.pdfs.map((pdf) => ({
+            id: pdf._id,
+            title: pdf.title,
+            link: pdf.link,
+        })) || [],
+        videos: program.videos.map((video) => ({
+            id: video._id,
+            title: video.title,
+            link: video.link,
+        })) || [],
     })));
 });
 exports.AllPrograms = AllPrograms;
@@ -37,8 +45,16 @@ const ProgramById = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     return result(res, 200, {
         name: program.title,
         photo: program.photo,
-        pdfs: program.pdfs,
-        videos: program.videos,
+        pdfs: program.pdfs.map((pdf) => ({
+            id: pdf._id,
+            title: pdf.title,
+            link: pdf.link,
+        })) || [],
+        videos: program.videos.map((video) => ({
+            id: video._id,
+            title: video.title,
+            link: video.link,
+        })) || [],
     });
 });
 exports.ProgramById = ProgramById;
@@ -129,9 +145,33 @@ const DeleteProgramByID = (req, res) => __awaiter(void 0, void 0, void 0, functi
     const program = yield Program_1.default.findById(id);
     if (!program)
         return result(res, 404, 'Program not found');
-    yield Program_1.default.findByIdAndDelete(id);
+    yield program.remove();
+    return result(res, 200, 'Program deleted successfully');
 });
 exports.DeleteProgramByID = DeleteProgramByID;
+const DeleteResourceByID = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id, resourceID } = req.params;
+    if (!id || !resourceID)
+        return result(res, 400, 'Program id is required');
+    const program = yield Program_1.default.findById(id);
+    const resource = yield Collection_1.default.findById(resourceID);
+    if (!program) {
+        return result(res, 404, 'Program not found');
+    }
+    else if (!resource) {
+        return result(res, 404, 'Resource not found');
+    }
+    if (resource.type === 'PDF') {
+        program.pdfs = program.pdfs.filter((pdf) => pdf.toString() !== resourceID);
+    }
+    else {
+        program.videos = program.videos.filter((video) => video.toString() !== resourceID);
+    }
+    yield program.save();
+    yield resource.remove();
+    return result(res, 200, 'Resource deleted successfully');
+});
+exports.DeleteResourceByID = DeleteResourceByID;
 const result = (res, status, data) => {
     res.status(status).json(data);
 };
