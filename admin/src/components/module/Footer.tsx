@@ -51,9 +51,8 @@ export default function Footer() {
 				</Box>
 				<Box className='items-end justify-end'>
 					<Text className='text-2xl mb-3'>Contact Us</Text>
-					<Text>loremIpsum@gmail.com</Text>
-					<Text>+91-XXXXXXXXX</Text>
-					<Text>+91-XXXXXXXXX</Text>
+					<Text>jyotieducaretech@gmail.com</Text>
+					<Text>+91 9848002053</Text>
 				</Box>
 			</Box>
 		</footer>

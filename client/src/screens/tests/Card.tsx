@@ -31,22 +31,24 @@ export default function Card(props: TestUpcoming | TestOnGoing | TestPast) {
 	const { title, id } = props;
 
 	const onClick = () => {
-		const isUpcoming = 'upcoming' in props;
-		const isOnGoing = 'ongoing' in props;
-		const isCompleted = 'completed' in props ? props.completed : false;
-		const isPast = 'past' in props;
+		// const isUpcoming = 'upcoming' in props;
+		// const isOnGoing = 'ongoing' in props;
+		// const isCompleted = 'completed' in props ? props.completed : false;
+		// const isPast = 'past' in props;
 
-		if (isOnGoing) {
-			if (isCompleted) {
-				showResult(id);
-			} else {
-				navigate('/home/tests/terms-conditions/' + id);
-			}
-		} else if (isPast) {
-			if (isCompleted) {
-				showResult(id);
-			}
-		}
+		return navigate('/home/tests/terms-conditions/' + id);
+
+		// if (isOnGoing) {
+		// 	if (isCompleted) {
+		// 		showResult(id);
+		// 	} else {
+		// 		navigate('/home/tests/terms-conditions/' + id);
+		// 	}
+		// } else if (isPast) {
+		// 	if (isCompleted) {
+		// 		showResult(id);
+		// 	}
+		// }
 	};
 
 	return (

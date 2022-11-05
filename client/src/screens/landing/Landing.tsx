@@ -82,26 +82,11 @@ export default function Landing() {
 				<Text className='text-4xl font-bold'>Mission</Text>
 				<Box className='text-dark mt-[3%]'>
 					<Text>
-						Est fugiat tempor magna veniam adipisicing cillum veniam. Aliqua incididunt aliqua et
-						irure amet. Eiusmod quis adipisicing eu fugiat anim ad proident quis. Cillum cillum
-						nulla id laboris fugiat ullamco adipisicing. Est fugiat tempor magna veniam adipisicing
-						cillum veniam. Aliqua incididunt aliqua et irure amet. Eiusmod quis adipisicing eu
-						fugiat anim ad proident quis. Cillum cillum nulla id laboris fugiat ullamco adipisicing.
-						Est fugiat tempor magna veniam adipisicing cillum veniam. Aliqua incididunt aliqua et
-						irure amet. Eiusmod quis adipisicing eu fugiat anim ad proident quis. Cillum cillum
-						nulla id laboris fugiat ullamco adipisicing. Est fugiat tempor magna veniam adipisicing
-						cillum veniam. Aliqua incididunt aliqua et irure amet. Eiusmod quis adipisicing eu
-						fugiat anim ad proident quis. Cillum cillum nulla id laboris fugiat ullamco adipisicing.
-						Est fugiat tempor magna veniam adipisicing cillum veniam. Aliqua incididunt aliqua et
-						irure amet. Eiusmod quis adipisicing eu fugiat anim ad proident quis. Cillum cillum
-						nulla id laboris fugiat ullamco adipisicing. Est fugiat tempor magna veniam adipisicing
-						cillum veniam. Aliqua incididunt aliqua et irure amet. Eiusmod quis adipisicing eu
-						fugiat anim ad proident quis. Cillum cillum nulla id laboris fugiat ullamco adipisicing.
-						Est fugiat tempor magna veniam adipisicing cillum veniam. Aliqua incididunt aliqua et
-						irure amet. Eiusmod quis adipisicing eu fugiat anim ad proident quis. Cillum cillum
-						nulla id laboris fugiat ullamco adipisicing. Est fugiat tempor magna veniam adipisicing
-						cillum veniam. Aliqua incididunt aliqua et irure amet. Eiusmod quis adipisicing eu
-						fugiat anim ad proident quis. Cillum cillum nulla id laboris fugiat ullamco adipisicing.
+						Our platform aims for the children of deprived backgrounds to avail all opportunities to
+						grow equally like others , and also for the elderly to be technically self-sufficient ,
+						to connect , and be a part of the digital world in this modern era . We aim to spread
+						knowledge to all those who want to learn new things or to advance in their studies . but
+						lack the Resources to do so.
 					</Text>
 				</Box>
 			</Box>
@@ -112,26 +97,11 @@ export default function Landing() {
 				<Text className='text-4xl font-bold'>Vision</Text>
 				<Box className='text-dark mt-[3%]'>
 					<Text>
-						Est fugiat tempor magna veniam adipisicing cillum veniam. Aliqua incididunt aliqua et
-						irure amet. Eiusmod quis adipisicing eu fugiat anim ad proident quis. Cillum cillum
-						nulla id laboris fugiat ullamco adipisicing. Est fugiat tempor magna veniam adipisicing
-						cillum veniam. Aliqua incididunt aliqua et irure amet. Eiusmod quis adipisicing eu
-						fugiat anim ad proident quis. Cillum cillum nulla id laboris fugiat ullamco adipisicing.
-						Est fugiat tempor magna veniam adipisicing cillum veniam. Aliqua incididunt aliqua et
-						irure amet. Eiusmod quis adipisicing eu fugiat anim ad proident quis. Cillum cillum
-						nulla id laboris fugiat ullamco adipisicing. Est fugiat tempor magna veniam adipisicing
-						cillum veniam. Aliqua incididunt aliqua et irure amet. Eiusmod quis adipisicing eu
-						fugiat anim ad proident quis. Cillum cillum nulla id laboris fugiat ullamco adipisicing.
-						Est fugiat tempor magna veniam adipisicing cillum veniam. Aliqua incididunt aliqua et
-						irure amet. Eiusmod quis adipisicing eu fugiat anim ad proident quis. Cillum cillum
-						nulla id laboris fugiat ullamco adipisicing. Est fugiat tempor magna veniam adipisicing
-						cillum veniam. Aliqua incididunt aliqua et irure amet. Eiusmod quis adipisicing eu
-						fugiat anim ad proident quis. Cillum cillum nulla id laboris fugiat ullamco adipisicing.
-						Est fugiat tempor magna veniam adipisicing cillum veniam. Aliqua incididunt aliqua et
-						irure amet. Eiusmod quis adipisicing eu fugiat anim ad proident quis. Cillum cillum
-						nulla id laboris fugiat ullamco adipisicing. Est fugiat tempor magna veniam adipisicing
-						cillum veniam. Aliqua incididunt aliqua et irure amet. Eiusmod quis adipisicing eu
-						fugiat anim ad proident quis. Cillum cillum nulla id laboris fugiat ullamco adipisicing.
+						Provide necessary support for children to grow in education, confidence and skills to
+						achieve their goal. Extend support to the elderly to carry out day to day digital
+						activities in the modern society We will be here for you every step of the way. Our
+						education consultants will work with you and your family to plan the next step on your
+						educational journey.
 					</Text>
 				</Box>
 			</Box>
@@ -142,26 +112,12 @@ export default function Landing() {
 				<Text className='text-4xl font-bold'>About</Text>
 				<Box className='text-dark mt-[3%]'>
 					<Text>
-						Est fugiat tempor magna veniam adipisicing cillum veniam. Aliqua incididunt aliqua et
-						irure amet. Eiusmod quis adipisicing eu fugiat anim ad proident quis. Cillum cillum
-						nulla id laboris fugiat ullamco adipisicing. Est fugiat tempor magna veniam adipisicing
-						cillum veniam. Aliqua incididunt aliqua et irure amet. Eiusmod quis adipisicing eu
-						fugiat anim ad proident quis. Cillum cillum nulla id laboris fugiat ullamco adipisicing.
-						Est fugiat tempor magna veniam adipisicing cillum veniam. Aliqua incididunt aliqua et
-						irure amet. Eiusmod quis adipisicing eu fugiat anim ad proident quis. Cillum cillum
-						nulla id laboris fugiat ullamco adipisicing. Est fugiat tempor magna veniam adipisicing
-						cillum veniam. Aliqua incididunt aliqua et irure amet. Eiusmod quis adipisicing eu
-						fugiat anim ad proident quis. Cillum cillum nulla id laboris fugiat ullamco adipisicing.
-						Est fugiat tempor magna veniam adipisicing cillum veniam. Aliqua incididunt aliqua et
-						irure amet. Eiusmod quis adipisicing eu fugiat anim ad proident quis. Cillum cillum
-						nulla id laboris fugiat ullamco adipisicing. Est fugiat tempor magna veniam adipisicing
-						cillum veniam. Aliqua incididunt aliqua et irure amet. Eiusmod quis adipisicing eu
-						fugiat anim ad proident quis. Cillum cillum nulla id laboris fugiat ullamco adipisicing.
-						Est fugiat tempor magna veniam adipisicing cillum veniam. Aliqua incididunt aliqua et
-						irure amet. Eiusmod quis adipisicing eu fugiat anim ad proident quis. Cillum cillum
-						nulla id laboris fugiat ullamco adipisicing. Est fugiat tempor magna veniam adipisicing
-						cillum veniam. Aliqua incididunt aliqua et irure amet. Eiusmod quis adipisicing eu
-						fugiat anim ad proident quis. Cillum cillum nulla id laboris fugiat ullamco adipisicing.
+						An educational consultant, also called a higher education consultant, assists students
+						and their parents in planning for college and financial aid. EduCareTech is a digital
+						education support system working towards uplifting literacy and skills in deprived
+						Children and elderly by providing Education with Care through Technology .While we can
+						step in to help a family at any point in their planning journey, the best time to
+						contact us is in your student's freshman year.
 					</Text>
 				</Box>
 			</Box>

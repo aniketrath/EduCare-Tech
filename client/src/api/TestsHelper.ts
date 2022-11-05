@@ -40,12 +40,16 @@ const getTest = (id: string) => {
 	});
 };
 
-const submitTest = (id: string, questions: Question[]) => {
+const submitTest = (id: string, resultID: string, questions: Question[]) => {
 	return new Promise((resolve, reject) => {
 		Axios.post('/tests/submit/' + id, {
 			questions,
+			resultID,
 		})
 			.then((res) => {
+				store.dispatch(
+					showAlert('You have scored ' + res.data.score + ' out of ' + res.data.total)
+				);
 				resolve(res.data);
 			})
 			.catch((err) => {

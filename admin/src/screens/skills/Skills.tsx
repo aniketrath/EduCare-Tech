@@ -1,5 +1,5 @@
 import React from 'react';
-import { getSkills } from '../../api/SkillsHelper';
+import { deleteSkill, getSkills } from '../../api/SkillsHelper';
 import Box from '../../components/root/Box';
 import Text from '../../components/root/Text';
 import Card from '../../components/module/SkillCard';
@@ -16,6 +16,10 @@ export default function Skills() {
 		getSkills();
 	}, []);
 
+	const onDelete = (id: string) => {
+		deleteSkill(id);
+	};
+
 	return (
 		<Box>
 			<Box className='py-6 px-[4%]'>
@@ -26,7 +30,13 @@ export default function Skills() {
 
 				<Box className='grid grid-cols-2 md:grid-cols-4 gap-3'>
 					{skills.map((skill, index) => (
-						<Card id={skill.id} title={skill.title} photo={skill.photo} key={index} />
+						<Card
+							id={skill.id}
+							title={skill.title}
+							photo={skill.photo}
+							key={index}
+							onDelete={onDelete}
+						/>
 					))}
 				</Box>
 			</Box>

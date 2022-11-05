@@ -11,8 +11,18 @@ export const AllCollections = async (req: Request, res: Response) => {
 	const videos = collections.filter((collection) => collection.type === 'VIDEO');
 
 	return result(res, 200, {
-		pdfs,
-		videos,
+		pdfs:
+			pdfs.map((pdf) => ({
+				id: pdf._id,
+				title: pdf.title,
+				link: pdf.link,
+			})) || [],
+		videos:
+			videos.map((video) => ({
+				id: video._id,
+				title: video.title,
+				link: video.link,
+			})) || [],
 	});
 };
 
@@ -47,6 +57,18 @@ export const CreateCollection = async (req: Request, res: Response) => {
 	});
 
 	return result(res, 200, 'Collection created successfully');
+};
+
+export const DeleteCollection = async (req: Request, res: Response) => {
+	const { id } = req.params;
+
+	const collection = await Collection.findById(id);
+
+	if (!collection || !collection.alone) return result(res, 404, 'Collection not found');
+
+	await collection.delete();
+
+	return result(res, 200, 'Collection deleted successfully');
 };
 
 const result = (res: Response, status: number, data: string | number | object) => {

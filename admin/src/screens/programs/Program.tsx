@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { getCollections } from '../../api/CollectionsHelper';
-import { getProgram } from '../../api/ProgramsHelper';
+import { deleteProgramResource, getProgram } from '../../api/ProgramsHelper';
 import Card from '../../components/module/CollectionCard';
 import Loading from '../../components/module/Loading';
 import Box from '../../components/root/Box';
@@ -22,6 +22,10 @@ export default function Program() {
 		return <Navigate to='/home/programs' replace />;
 	}
 	const { title, pdfs, videos } = program;
+
+	const onDelete = (resourceID: string) => {
+		deleteProgramResource(id, resourceID);
+	};
 
 	return (
 		<Box>
@@ -46,7 +50,14 @@ export default function Program() {
 
 						<Box className='my-6 grid grid-cols-2 md:grid-cols-4 gap-3'>
 							{pdfs.map((pdf, index) => (
-								<Card key={index} title={pdf.title} pdf link={SERVER_URL + 'file/' + pdf.link} />
+								<Card
+									key={index}
+									id={pdf.id}
+									title={pdf.title}
+									pdf
+									link={SERVER_URL + 'file/' + pdf.link}
+									onDelete={onDelete}
+								/>
 							))}
 						</Box>
 					</>
@@ -60,7 +71,14 @@ export default function Program() {
 
 						<Box className='my-6 grid grid-cols-2 md:grid-cols-4 gap-3'>
 							{videos.map((video, index) => (
-								<Card key={index} title={video.title} video link={video.link} />
+								<Card
+									key={index}
+									id={video.id}
+									title={video.title}
+									video
+									link={video.link}
+									onDelete={onDelete}
+								/>
 							))}
 						</Box>
 					</>

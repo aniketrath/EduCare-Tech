@@ -4,8 +4,6 @@ import ITest from '../types/Test';
 const TestSchema = new mongoose.Schema<ITest>(
 	{
 		title: { type: String },
-		startsAt: { type: Date },
-		endsAt: { type: Date },
 		questions: [
 			{
 				type: mongoose.Schema.Types.ObjectId,

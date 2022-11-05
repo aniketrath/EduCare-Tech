@@ -4,7 +4,7 @@ import Skill from '../../model/Skill';
 import FileUpload from '../../utils/FileUpload';
 
 export const AllSkills = async (req: Request, res: Response) => {
-	const skills = await Skill.find();
+	const skills = await Skill.find().populate('pdfs videos');
 
 	return result(
 		res,
@@ -13,8 +13,18 @@ export const AllSkills = async (req: Request, res: Response) => {
 			id: skill._id,
 			title: skill.title,
 			photo: skill.photo,
-			pdfs: skill.pdfs || [],
-			videos: skill.videos || [],
+			pdfs:
+				skill.pdfs.map((pdf) => ({
+					id: pdf._id,
+					title: pdf.title,
+					link: pdf.link,
+				})) || [],
+			videos:
+				skill.videos.map((video) => ({
+					id: video._id,
+					title: video.title,
+					link: video.link,
+				})) || [],
 		}))
 	);
 };
@@ -30,8 +40,18 @@ export const SkillById = async (req: Request, res: Response) => {
 	return result(res, 200, {
 		name: skill.title,
 		photo: skill.photo,
-		pdfs: skill.pdfs,
-		videos: skill.videos,
+		pdfs:
+			skill.pdfs.map((pdf) => ({
+				id: pdf._id,
+				title: pdf.title,
+				link: pdf.link,
+			})) || [],
+		videos:
+			skill.videos.map((video) => ({
+				id: video._id,
+				title: video.title,
+				link: video.link,
+			})) || [],
 	});
 };
 
@@ -129,7 +149,34 @@ export const DeleteSkillByID = async (req: Request, res: Response) => {
 	const skill = await Skill.findById(id);
 	if (!skill) return result(res, 404, 'Skill not found');
 
-	await Skill.findByIdAndDelete(id);
+	await skill.remove();
+
+	return result(res, 200, 'Skill deleted successfully');
+};
+
+export const DeleteResourceByID = async (req: Request, res: Response) => {
+	const { id, resourceID } = req.params;
+
+	if (!id) return result(res, 400, 'Skill id is required');
+
+	const skill = await Skill.findById(id);
+	const resource = await Collection.findById(resourceID);
+	if (!skill) {
+		return result(res, 404, 'Program not found');
+	} else if (!resource) {
+		return result(res, 404, 'Resource not found');
+	}
+
+	if (resource.type === 'PDF') {
+		skill.pdfs = skill.pdfs.filter((pdf) => pdf.toString() !== resourceID);
+	} else {
+		skill.videos = skill.videos.filter((video) => video.toString() !== resourceID);
+	}
+
+	await skill.save();
+	await resource.remove();
+
+	return result(res, 200, 'Resource deleted successfully');
 };
 
 const result = (res: Response, status: number, data: string | number | object) => {

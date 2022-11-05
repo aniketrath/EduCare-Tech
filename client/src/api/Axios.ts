@@ -2,7 +2,8 @@ import axios from 'axios';
 import store from '../store/store';
 import { showAlert } from '../store/UtilsReducer';
 
-const ServerURL = 'https://api.educaretech.org/';
+// const ServerURL = 'https://api.educaretech.org/';
+const ServerURL = 'http://localhost:9000/';
 
 const Axios = axios.create({
 	baseURL: ServerURL,

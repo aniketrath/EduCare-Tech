@@ -1,5 +1,5 @@
 import React from 'react';
-import { getPrograms } from '../../api/ProgramsHelper';
+import { deleteProgram, getPrograms } from '../../api/ProgramsHelper';
 import Box from '../../components/root/Box';
 import Text from '../../components/root/Text';
 import Card from '../../components/module/ProgramCard';
@@ -15,6 +15,9 @@ export default function Programs() {
 	React.useEffect(() => {
 		getPrograms();
 	}, []);
+	const onDelete = (id: string) => {
+		deleteProgram(id);
+	};
 	return (
 		<Box>
 			<Box className='py-6 px-[4%]'>
@@ -26,7 +29,13 @@ export default function Programs() {
 
 				<Box className='grid grid-cols-2 md:grid-cols-4 gap-3'>
 					{programs.map((program, index) => (
-						<Card id={program.id} title={program.title} photo={program.photo} key={index} />
+						<Card
+							id={program.id}
+							title={program.title}
+							photo={program.photo}
+							key={index}
+							onDelete={onDelete}
+						/>
 					))}
 				</Box>
 			</Box>

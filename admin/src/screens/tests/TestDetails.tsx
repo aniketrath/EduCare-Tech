@@ -8,8 +8,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store/store';
 import {
 	resetTestDetails,
-	setTestEndDate,
-	setTestStartDate,
 	setTestTitle,
 	addQuestion as addQuestionRedux,
 	removeQuestion,
@@ -71,24 +69,7 @@ export default function TestDetails() {
 						onChange={(text) => dispatch(setTestTitle(text))}
 					/>
 				</Box>
-				<Box horizontal className='justify-around'>
-					<Box className='w-1/3'>
-						<Text className='text-base font-medium capitalize text-dark'>Test Start Date</Text>
-						<TextInput
-							value={state.startDate}
-							placeholder='dd/mm/yyyy'
-							onChange={(text) => dispatch(setTestStartDate(text))}
-						/>
-					</Box>
-					<Box className='w-1/3'>
-						<Text className='text-base font-medium capitalize text-dark'>Test End Date</Text>
-						<TextInput
-							value={state.endDate}
-							placeholder='dd/mm/yyyy'
-							onChange={(text) => dispatch(setTestEndDate(text))}
-						/>
-					</Box>
-				</Box>
+
 				<Box className='center'>
 					<Box className='w-1/3'>
 						<Text className='text-base font-medium capitalize text-dark'>Test Time (in mins)</Text>

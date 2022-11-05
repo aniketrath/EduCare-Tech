@@ -4,7 +4,7 @@ import Program from '../../model/Program';
 import FileUpload from '../../utils/FileUpload';
 
 export const AllPrograms = async (req: Request, res: Response) => {
-	const programs = await Program.find();
+	const programs = await Program.find().populate('pdfs videos');
 
 	return result(
 		res,
@@ -13,8 +13,18 @@ export const AllPrograms = async (req: Request, res: Response) => {
 			id: program._id,
 			title: program.title,
 			photo: program.photo,
-			pdfs: program.pdfs || [],
-			videos: program.videos || [],
+			pdfs:
+				program.pdfs.map((pdf) => ({
+					id: pdf._id,
+					title: pdf.title,
+					link: pdf.link,
+				})) || [],
+			videos:
+				program.videos.map((video) => ({
+					id: video._id,
+					title: video.title,
+					link: video.link,
+				})) || [],
 		}))
 	);
 };
@@ -30,8 +40,18 @@ export const ProgramById = async (req: Request, res: Response) => {
 	return result(res, 200, {
 		name: program.title,
 		photo: program.photo,
-		pdfs: program.pdfs,
-		videos: program.videos,
+		pdfs:
+			program.pdfs.map((pdf) => ({
+				id: pdf._id,
+				title: pdf.title,
+				link: pdf.link,
+			})) || [],
+		videos:
+			program.videos.map((video) => ({
+				id: video._id,
+				title: video.title,
+				link: video.link,
+			})) || [],
 	});
 };
 
@@ -129,7 +149,34 @@ export const DeleteProgramByID = async (req: Request, res: Response) => {
 	const program = await Program.findById(id);
 	if (!program) return result(res, 404, 'Program not found');
 
-	await Program.findByIdAndDelete(id);
+	await program.remove();
+
+	return result(res, 200, 'Program deleted successfully');
+};
+
+export const DeleteResourceByID = async (req: Request, res: Response) => {
+	const { id, resourceID } = req.params;
+
+	if (!id || !resourceID) return result(res, 400, 'Program id is required');
+
+	const program = await Program.findById(id);
+	const resource = await Collection.findById(resourceID);
+	if (!program) {
+		return result(res, 404, 'Program not found');
+	} else if (!resource) {
+		return result(res, 404, 'Resource not found');
+	}
+
+	if (resource.type === 'PDF') {
+		program.pdfs = program.pdfs.filter((pdf) => pdf.toString() !== resourceID);
+	} else {
+		program.videos = program.videos.filter((video) => video.toString() !== resourceID);
+	}
+
+	await program.save();
+	await resource.remove();
+
+	return result(res, 200, 'Resource deleted successfully');
 };
 
 const result = (res: Response, status: number, data: string | number | object) => {

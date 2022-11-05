@@ -1,13 +1,7 @@
-import { setPrograms } from '../store/ProgramReducer';
+import { Program, removeProgram, removeResource, setPrograms } from '../store/ProgramReducer';
 import store from '../store/store';
 import { showAlert } from '../store/UtilsReducer';
 import Axios from './Axios';
-
-interface Program {
-	id: string;
-	title: string;
-	photo: string;
-}
 
 const getPrograms = () => {
 	return new Promise((resolve, reject) => {
@@ -31,18 +25,8 @@ const getProgram = (id: string) => {
 	const programs = store.getState().program.programs;
 
 	const program = programs.find((program: Program) => program.id === id);
-	if (!program) {
-		return null;
-	}
-	const { title, photo, pdfs, videos } = program;
-	return (
-		{
-			title,
-			photo,
-			pdfs: pdfs || [],
-			videos: videos || [],
-		} || null
-	);
+
+	return program || null;
 };
 
 const createProgram = (title: string, file: File) => {
@@ -63,6 +47,25 @@ const createProgram = (title: string, file: File) => {
 					store.dispatch(showAlert(err.response.data));
 				} else {
 					store.dispatch(showAlert('Unable to create program. Please try again later.'));
+				}
+				console.log(err);
+			});
+	});
+};
+
+const deleteProgram = (id: string) => {
+	return new Promise((resolve, reject) => {
+		Axios.post('/programs/delete/' + id)
+			.then((res) => {
+				store.dispatch(showAlert(res.data));
+				store.dispatch(removeProgram(id));
+				resolve(res.data);
+			})
+			.catch((err) => {
+				if (err.response) {
+					store.dispatch(showAlert(err.response.data));
+				} else {
+					store.dispatch(showAlert('Unable to delete program. Please try again later.'));
 				}
 				console.log(err);
 			});
@@ -106,4 +109,30 @@ const addProgramResources = (
 	});
 };
 
-export { getPrograms, getProgram, createProgram, addProgramResources };
+const deleteProgramResource = (id: string, resourceId: string) => {
+	return new Promise((resolve, reject) => {
+		Axios.post('/programs/delete-resource/' + id + '/' + resourceId)
+			.then((res) => {
+				store.dispatch(showAlert(res.data));
+				store.dispatch(removeResource({ id, resourceId }));
+				resolve(res.data);
+			})
+			.catch((err) => {
+				if (err.response) {
+					store.dispatch(showAlert(err.response.data));
+				} else {
+					store.dispatch(showAlert('Unable to delete resource. Please try again later.'));
+				}
+				console.log(err);
+			});
+	});
+};
+
+export {
+	getPrograms,
+	getProgram,
+	createProgram,
+	addProgramResources,
+	deleteProgram,
+	deleteProgramResource,
+};

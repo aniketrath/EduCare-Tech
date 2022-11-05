@@ -1,4 +1,4 @@
-import { setSkills } from '../store/SkillReducer';
+import { removeResource, removeSkill, setSkills } from '../store/SkillReducer';
 import store from '../store/store';
 import { showAlert } from '../store/UtilsReducer';
 import Axios from './Axios';
@@ -10,7 +10,6 @@ interface Skill {
 }
 
 const getSkills = () => {
-
 	return new Promise((resolve, reject) => {
 		Axios.get('/skills/all')
 			.then((res) => {
@@ -95,4 +94,42 @@ const addSkillResources = (
 	});
 };
 
-export { getSkills, getSkill, createSkill, addSkillResources };
+const deleteSkill = (id: string) => {
+	return new Promise((resolve, reject) => {
+		Axios.post('/skills/delete/' + id)
+			.then((res) => {
+				store.dispatch(showAlert(res.data));
+				store.dispatch(removeSkill(id));
+				resolve(res.data);
+			})
+			.catch((err) => {
+				if (err.response) {
+					store.dispatch(showAlert(err.response.data));
+				} else {
+					store.dispatch(showAlert('Unable to delete skill. Please try again later.'));
+				}
+				console.log(err);
+			});
+	});
+};
+
+const deleteSkillResource = (id: string, resourceId: string) => {
+	return new Promise((resolve, reject) => {
+		Axios.post('/skills/delete-resource/' + id + '/' + resourceId)
+			.then((res) => {
+				store.dispatch(showAlert(res.data));
+				store.dispatch(removeResource({ id, resourceId }));
+				resolve(res.data);
+			})
+			.catch((err) => {
+				if (err.response) {
+					store.dispatch(showAlert(err.response.data));
+				} else {
+					store.dispatch(showAlert('Unable to delete resource. Please try again later.'));
+				}
+				console.log(err);
+			});
+	});
+};
+
+export { getSkills, getSkill, createSkill, addSkillResources, deleteSkill, deleteSkillResource };

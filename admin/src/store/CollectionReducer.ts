@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 interface Item {
 	title: string;
 	link: string;
+	id: string;
 }
 interface CollectionsState {
 	pdfs: Item[];
@@ -23,10 +24,15 @@ export const collectionsSlice = createSlice({
 			state.pdfs = pdfs;
 			state.videos = videos;
 		},
+		removeCollection: (state, action) => {
+			const { id } = action.payload;
+			state.pdfs = state.pdfs.filter((pdf) => pdf.id !== id);
+			state.videos = state.videos.filter((video) => video.id !== id);
+		},
 	},
 });
 
 // Action creators are generated for each case reducer function
-export const { setCollections } = collectionsSlice.actions;
+export const { setCollections, removeCollection } = collectionsSlice.actions;
 
 export default collectionsSlice.reducer;

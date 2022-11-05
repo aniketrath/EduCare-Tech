@@ -17,23 +17,15 @@ export interface Question {
 }
 
 export interface TestState {
-	upcoming: Test[];
-	ongoing: Test[];
-	past: Test[];
+	tests: Test[];
 	title: string;
-	startDate: string;
-	endDate: string;
 	questions: Question[];
 	time: number;
 }
 
 const initialState: TestState = {
-	upcoming: [],
-	ongoing: [],
-	past: [],
+	tests: [],
 	title: '',
-	startDate: '',
-	endDate: '',
 	questions: [],
 	time: 0,
 };
@@ -43,19 +35,10 @@ export const testSlice = createSlice({
 	initialState: initialState,
 	reducers: {
 		setTest: (state, action) => {
-			const { upcoming, ongoing, past } = action.payload;
-			state.upcoming = upcoming;
-			state.ongoing = ongoing;
-			state.past = past;
+			state.tests = action.payload;
 		},
 		setTestTitle: (state, action) => {
 			state.title = action.payload;
-		},
-		setTestStartDate: (state, action) => {
-			state.startDate = action.payload;
-		},
-		setTestEndDate: (state, action) => {
-			state.endDate = action.payload;
 		},
 		addQuestion: (state, action) => {
 			const { id, question, option1, option2, option3, option4, answer } = action.payload;
@@ -89,8 +72,6 @@ export const testSlice = createSlice({
 		},
 		resetTestDetails: (state) => {
 			state.title = '';
-			state.startDate = '';
-			state.endDate = '';
 			state.questions = [];
 			state.time = 0;
 		},
@@ -98,11 +79,10 @@ export const testSlice = createSlice({
 			state.questions = action.payload;
 		},
 		setTestDetails: (state, action) => {
-			const { title, startDate, endDate, questions } = action.payload;
+			const { title, questions, time } = action.payload;
 			state.title = title;
-			state.startDate = startDate;
-			state.endDate = endDate;
 			state.questions = questions;
+			state.time = time;
 		},
 		setTestTime: (state, action) => {
 			if (!isNaN(action.payload)) {
@@ -116,8 +96,6 @@ export const testSlice = createSlice({
 export const {
 	setTest,
 	setTestTitle,
-	setTestStartDate,
-	setTestEndDate,
 	resetTestDetails,
 	addQuestion,
 	removeQuestion,

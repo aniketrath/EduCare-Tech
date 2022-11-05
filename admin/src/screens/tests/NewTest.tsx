@@ -6,13 +6,7 @@ import Text from '../../components/root/Text';
 import TextInput from '../../components/root/TextInput';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store/store';
-import {
-	resetTestDetails,
-	setTestEndDate,
-	setTestStartDate,
-	setTestTime,
-	setTestTitle,
-} from '../../store/TestReducer';
+import { resetTestDetails, setTestTime, setTestTitle } from '../../store/TestReducer';
 import Button from '../../components/root/Button';
 import { createTest } from '../../api/TestsHelper';
 
@@ -27,7 +21,7 @@ export default function NewTest() {
 
 	const createTestHandler = () => {
 		createTest(state).then((res: any) => {
-			navigate('/home/tests/details/' + res.testID);
+			navigate('/home/tests/' + res.testID + '/details');
 		});
 	};
 
@@ -48,24 +42,6 @@ export default function NewTest() {
 					/>
 				</Box>
 
-				<Box horizontal className='justify-around'>
-					<Box className='w-1/3'>
-						<Text className='text-base font-medium capitalize text-dark'>Test Start Date</Text>
-						<TextInput
-							value={state.startDate}
-							placeholder='dd/mm/yyyy'
-							onChange={(text) => dispatch(setTestStartDate(text))}
-						/>
-					</Box>
-					<Box className='w-1/3'>
-						<Text className='text-base font-medium capitalize text-dark'>Test End Date</Text>
-						<TextInput
-							value={state.endDate}
-							placeholder='dd/mm/yyyy'
-							onChange={(text) => dispatch(setTestEndDate(text))}
-						/>
-					</Box>
-				</Box>
 				<Box className='center'>
 					<Box className='w-1/3'>
 						<Text className='text-base font-medium capitalize text-dark'>Test Time (in mins)</Text>

@@ -4,8 +4,8 @@ interface Skill {
 	id: string;
 	title: string;
 	photo: string;
-	pdfs: { title: string; link: string }[];
-	videos: { title: string; link: string }[];
+	pdfs: { title: string; link: string; id: string }[];
+	videos: { title: string; link: string; id: string }[];
 }
 interface SkillState {
 	skills: Skill[];
@@ -30,13 +30,29 @@ export const skillSlice = createSlice({
 			state.skills = action.payload;
 			state.isLoading = false;
 		},
+		removeSkill: (state, action) => {
+			const { id } = action.payload;
+			state.skills = state.skills.filter((skill) => skill.id !== id);
+		},
 		setSelectedSkill: (state, action) => {
 			state.selectedSkill = action.payload;
+		},
+		removeResource: (state, action) => {
+			const { id, resourceId } = action.payload;
+			const skill = state.skills.find((skill) => skill.id === id);
+			if (skill) {
+				skill.pdfs = skill.pdfs.filter((pdf) => pdf.id !== resourceId);
+				skill.videos = skill.videos.filter((video) => video.id !== resourceId);
+				if (skill.id === state.selectedSkill?.id) {
+					state.selectedSkill = skill;
+				}
+			}
 		},
 	},
 });
 
 // Action creators are generated for each case reducer function
-export const { setLoading, setSkills, setSelectedSkill } = skillSlice.actions;
+export const { setLoading, setSkills, setSelectedSkill, removeSkill, removeResource } =
+	skillSlice.actions;
 
 export default skillSlice.reducer;

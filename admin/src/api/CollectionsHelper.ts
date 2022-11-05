@@ -1,4 +1,4 @@
-import { setCollections } from '../store/CollectionReducer';
+import { removeCollection, setCollections } from '../store/CollectionReducer';
 import store from '../store/store';
 import { showAlert } from '../store/UtilsReducer';
 import Axios from './Axios';
@@ -55,4 +55,23 @@ const createCollection = (data: {
 	});
 };
 
-export { getCollections, createCollection };
+const deleteCollection = (id: string) => {
+	return new Promise((resolve, reject) => {
+		Axios.post(`/collections/delete/${id}`)
+			.then((res) => {
+				store.dispatch(showAlert(res.data));
+				store.dispatch(removeCollection(id));
+				resolve(res.data);
+			})
+			.catch((err) => {
+				if (err.response) {
+					store.dispatch(showAlert(err.response.data));
+				} else {
+					store.dispatch(showAlert('Unable to delete collection. Please try again later.'));
+				}
+				console.log(err);
+			});
+	});
+};
+
+export { getCollections, createCollection, deleteCollection };

@@ -15,7 +15,7 @@ export default function TestScreen() {
 	const navigate = useNavigate();
 	const { id } = useParams();
 
-	const { questions, selected, time } = useSelector((state: RootState) => state.exam);
+	const { questions, selected, time, resultID } = useSelector((state: RootState) => state.exam);
 	const dispatch = useDispatch();
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +34,7 @@ export default function TestScreen() {
 		if (!id) {
 			return navigate('/');
 		}
-		submitTest(id, questions).then((res) => {
+		submitTest(id, resultID, questions).then((res) => {
 			navigate('/home/tests');
 		});
 	};

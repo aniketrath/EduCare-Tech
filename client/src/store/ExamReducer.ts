@@ -15,6 +15,7 @@ interface ExamState {
 	selected: number;
 	startTime: number;
 	time: number;
+	resultID: string;
 }
 
 const initialState: ExamState = {
@@ -22,6 +23,7 @@ const initialState: ExamState = {
 	selected: 0,
 	startTime: 0,
 	time: 0,
+	resultID: '',
 };
 
 export const testSlice = createSlice({
@@ -32,6 +34,7 @@ export const testSlice = createSlice({
 			state.questions = action.payload.questions;
 			state.time = action.payload.time;
 			state.startTime = Date.now();
+			state.resultID = action.payload.resultID;
 		},
 		setSelected: (state, action) => {
 			state.selected = action.payload;
@@ -43,6 +46,8 @@ export const testSlice = createSlice({
 			state.questions = [];
 			state.selected = 0;
 			state.startTime = 0;
+			state.time = 0;
+			state.resultID = '';
 		},
 	},
 });

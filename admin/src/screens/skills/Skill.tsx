@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
-import { getSkill } from '../../api/SkillsHelper';
+import { deleteSkillResource, getSkill } from '../../api/SkillsHelper';
 import Card from '../../components/module/CollectionCard';
 import Box from '../../components/root/Box';
 import Button from '../../components/root/Button';
@@ -21,6 +21,10 @@ export default function Skill() {
 		return <Navigate to='/home/skills' replace />;
 	}
 	const { title, pdfs, videos } = skill;
+
+	const onDelete = (resourceID: string) => {
+		deleteSkillResource(id, resourceID);
+	};
 
 	return (
 		<Box>
@@ -44,7 +48,14 @@ export default function Skill() {
 
 						<Box className='my-6 grid grid-cols-2 md:grid-cols-4 gap-3'>
 							{pdfs.map((pdf, index) => (
-								<Card key={index} title={pdf.title} pdf link={SERVER_URL + 'file/' + pdf.link} />
+								<Card
+									id={pdf.id}
+									key={index}
+									title={pdf.title}
+									pdf
+									link={SERVER_URL + 'file/' + pdf.link}
+									onDelete={onDelete}
+								/>
 							))}
 						</Box>
 					</>
@@ -57,7 +68,14 @@ export default function Skill() {
 
 						<Box className='my-6 grid grid-cols-2 md:grid-cols-4 gap-3'>
 							{videos.map((video, index) => (
-								<Card key={index} title={video.title} video link={video.link} />
+								<Card
+									id={video.id}
+									key={index}
+									title={video.title}
+									video
+									link={video.link}
+									onDelete={onDelete}
+								/>
 							))}
 						</Box>
 					</>

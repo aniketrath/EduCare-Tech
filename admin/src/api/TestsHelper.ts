@@ -5,8 +5,7 @@ import Axios from './Axios';
 
 type NewTest = {
 	title: string;
-	startDate: string;
-	endDate: string;
+	time: number;
 };
 
 const getTests = () => {
@@ -28,10 +27,10 @@ const getTests = () => {
 };
 
 const createTest = (test: NewTest) => {
-	const { title, startDate, endDate } = test;
+	const { title, time } = test;
 
 	return new Promise((resolve, reject) => {
-		Axios.post('/tests/create', { title, startDate, endDate })
+		Axios.post('/tests/create', { title, time })
 			.then((res) => {
 				store.dispatch(showAlert('Test created successfully.'));
 				resolve(res.data);

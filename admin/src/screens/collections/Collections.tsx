@@ -1,5 +1,5 @@
 import React from 'react';
-import { getCollections } from '../../api/CollectionsHelper';
+import { deleteCollection, getCollections } from '../../api/CollectionsHelper';
 import Box from '../../components/root/Box';
 import Text from '../../components/root/Text';
 import Card from '../../components/module/CollectionCard';
@@ -19,6 +19,10 @@ export default function Collections() {
 
 	const { pdfs, videos } = collections;
 
+	const onDelete = (id: string) => {
+		deleteCollection(id);
+	};
+
 	return (
 		<Box>
 			<Box className='py-6 px-[4%]'>
@@ -29,7 +33,14 @@ export default function Collections() {
 
 				<Box className='my-6 grid grid-cols-2 md:grid-cols-4 gap-3'>
 					{pdfs.map((pdf, index) => (
-						<Card key={index} title={pdf.title} pdf link={SERVER_URL + 'file/' + pdf.link} />
+						<Card
+							key={index}
+							id={pdf.id}
+							title={pdf.title}
+							pdf
+							link={SERVER_URL + 'file/' + pdf.link}
+							onDelete={onDelete}
+						/>
 					))}
 				</Box>
 
@@ -39,7 +50,14 @@ export default function Collections() {
 
 				<Box className='my-6 grid grid-cols-2 md:grid-cols-4 gap-3'>
 					{videos.map((video, index) => (
-						<Card key={index} title={video.title} video link={video.link} />
+						<Card
+							id={video.id}
+							key={index}
+							title={video.title}
+							video
+							link={video.link}
+							onDelete={onDelete}
+						/>
 					))}
 				</Box>
 			</Box>

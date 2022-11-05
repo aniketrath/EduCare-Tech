@@ -7,15 +7,13 @@ interface Test {
 }
 
 interface TestState {
-	upcoming: Test[];
-	ongoing: Test[];
-	past: Test[];
+	tests: Test[];
+	query: string;
 }
 
 const initialState: TestState = {
-	upcoming: [],
-	ongoing: [],
-	past: [],
+	tests: [],
+	query: '',
 };
 
 export const testSlice = createSlice({
@@ -23,15 +21,15 @@ export const testSlice = createSlice({
 	initialState: initialState,
 	reducers: {
 		setTest: (state, action) => {
-			const { upcoming, ongoing, past } = action.payload;
-			state.upcoming = upcoming;
-			state.ongoing = ongoing;
-			state.past = past;
+			state.tests = action.payload;
+		},
+		setSearchQuery: (state, action) => {
+			state.query = action.payload;
 		},
 	},
 });
 
 // Action creators are generated for each case reducer function
-export const { setTest } = testSlice.actions;
+export const { setTest, setSearchQuery } = testSlice.actions;
 
 export default testSlice.reducer;
