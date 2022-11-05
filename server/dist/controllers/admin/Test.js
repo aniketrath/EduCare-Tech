@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateTest = exports.DeleteQuestion = exports.SaveQuestion = exports.TestResponses = exports.TestDetails = exports.CreateTest = exports.AllTests = void 0;
+exports.DeleteTest = exports.UpdateTest = exports.DeleteQuestion = exports.SaveQuestion = exports.TestResponses = exports.TestDetails = exports.CreateTest = exports.AllTests = void 0;
 const Test_1 = __importDefault(require("../../model/Test"));
 // import moment from 'moment';
 const Result_1 = __importDefault(require("../../model/Result"));
@@ -137,6 +137,15 @@ const UpdateTest = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     return result(res, 200, 'Test updated successfully');
 });
 exports.UpdateTest = UpdateTest;
+const DeleteTest = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { testID } = req.params;
+    const test = yield Test_1.default.findById(testID);
+    if (!test)
+        return result(res, 404, 'Test not found');
+    test.remove();
+    return result(res, 200, 'Test deleted successfully');
+});
+exports.DeleteTest = DeleteTest;
 const result = (res, status, data) => {
     res.status(status).json(data);
 };

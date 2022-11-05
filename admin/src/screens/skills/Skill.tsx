@@ -5,8 +5,8 @@ import Card from '../../components/module/CollectionCard';
 import Box from '../../components/root/Box';
 import Button from '../../components/root/Button';
 import Text from '../../components/root/Text';
-import { SERVER_URL } from '../../utils/Consts';
 import { useNavigate } from 'react-router-dom';
+import { ServerURL } from '../../api/Axios';
 
 export default function Skill() {
 	const { id } = useParams();
@@ -53,7 +53,7 @@ export default function Skill() {
 									key={index}
 									title={pdf.title}
 									pdf
-									link={SERVER_URL + 'file/' + pdf.link}
+									link={ServerURL + 'file/' + pdf.link}
 									onDelete={onDelete}
 								/>
 							))}

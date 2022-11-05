@@ -5,7 +5,7 @@ import Text from '../../components/root/Text';
 import Card from '../../components/module/CollectionCard';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
-import { SERVER_URL } from '../../utils/Consts';
+import { ServerURL } from '../../api/Axios';
 
 export default function Collections() {
 	const collections = useSelector((state: RootState) => state.collection);
@@ -25,7 +25,7 @@ export default function Collections() {
 
 				<Box className='my-6 grid grid-cols-2 md:grid-cols-4 gap-3'>
 					{pdfs.map((pdf, index) => (
-						<Card key={index} title={pdf.title} pdf link={SERVER_URL + 'file/' + pdf.link} />
+						<Card key={index} title={pdf.title} pdf link={ServerURL + 'file/' + pdf.link} />
 					))}
 				</Box>
 

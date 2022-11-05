@@ -21,7 +21,7 @@ export default function Footer() {
 						<Image src={BRAIN} />
 					</Box>
 					<Box className='ml-6'>
-						<Text className='text-2xl'>EduCare Tech</Text>
+						<Text className='text-2xl'>EduCareTech</Text>
 						<ul className='text-light decoration-white list-disc ml-9'>
 							<li>
 								<Button onClick={() => to('programs')} className='!bg-transparent text-dark px-0'>
@@ -52,7 +52,6 @@ export default function Footer() {
 				<Box className='items-end justify-end'>
 					<Text className='text-2xl mb-3'>Contact Us</Text>
 					<Text>jyotieducaretech@gmail.com</Text>
-					<Text>+91 9848002053</Text>
 				</Box>
 			</Box>
 		</footer>

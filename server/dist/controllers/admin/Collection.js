@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DeleteCollection = exports.CreateCollection = exports.AllCollections = void 0;
 const Collection_1 = __importDefault(require("../../model/Collection"));
 const FileUpload_1 = __importDefault(require("../../utils/FileUpload"));
+const fs_1 = __importDefault(require("fs"));
 const AllCollections = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const collections = yield Collection_1.default.find({
         alone: true,
@@ -71,6 +72,10 @@ const DeleteCollection = (req, res) => __awaiter(void 0, void 0, void 0, functio
     if (!collection || !collection.alone)
         return result(res, 404, 'Collection not found');
     yield collection.delete();
+    try {
+        yield fs_1.default.unlinkSync(__basedir + '/static/uploads/' + collection.link);
+    }
+    catch (e) { }
     return result(res, 200, 'Collection deleted successfully');
 });
 exports.DeleteCollection = DeleteCollection;

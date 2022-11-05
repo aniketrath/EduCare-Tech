@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import Collection from '../../model/Collection';
 import FileUpload from '../../utils/FileUpload';
+import fs from 'fs';
 
 export const AllCollections = async (req: Request, res: Response) => {
 	const collections = await Collection.find({
@@ -67,6 +68,9 @@ export const DeleteCollection = async (req: Request, res: Response) => {
 	if (!collection || !collection.alone) return result(res, 404, 'Collection not found');
 
 	await collection.delete();
+	try {
+		await fs.unlinkSync(__basedir + '/static/uploads/' + collection.link);
+	} catch (e) {}
 
 	return result(res, 200, 'Collection deleted successfully');
 };

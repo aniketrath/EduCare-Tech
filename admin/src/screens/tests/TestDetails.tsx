@@ -17,7 +17,7 @@ import {
 	setTestTime,
 } from '../../store/TestReducer';
 import Button from '../../components/root/Button';
-import { fetchTestDetails, saveQuestions } from '../../api/TestsHelper';
+import { deleteTest, fetchTestDetails, saveQuestions } from '../../api/TestsHelper';
 import Question from '../../components/module/Question';
 
 export default function TestDetails() {
@@ -36,10 +36,11 @@ export default function TestDetails() {
 		});
 	}, [id, dispatch]);
 
+	if (!id) {
+		return <Navigate to='/tests' />;
+	}
+
 	const saveQuestion = () => {
-		if (!id) {
-			return;
-		}
 		saveQuestions(id, state).then((res) => {
 			navigate('/home/tests/');
 		});
@@ -49,9 +50,11 @@ export default function TestDetails() {
 		navigate(`/home/tests/${id}/responses`);
 	};
 
-	if (!id) {
-		return <Navigate to='/tests' />;
-	}
+	const deleteHandler = () => {
+		deleteTest(id).then(() => {
+			navigate('/home/tests/');
+		});
+	};
 
 	return (
 		<Box>
@@ -90,6 +93,11 @@ export default function TestDetails() {
 					</Box>
 
 					<Box horizontal className='w-1/2 gap-3'>
+						<Box className='w-full'>
+							<Button className='bg-red-500' onClick={deleteHandler}>
+								Delete
+							</Button>
+						</Box>
 						<Box className='w-full'>
 							<Button className='bg-blue-500' onClick={openResponses}>
 								Responses

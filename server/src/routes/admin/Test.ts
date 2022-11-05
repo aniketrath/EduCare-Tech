@@ -7,6 +7,7 @@ import {
 	DeleteQuestion,
 	UpdateTest,
 	TestResponses,
+	DeleteTest,
 } from '../../controllers/admin/Test';
 import VerifyAdmin from '../../middleware/VerifyAdmin';
 
@@ -19,5 +20,6 @@ testRouter.route('/responses/:testID').all(VerifyAdmin).get(TestResponses);
 testRouter.route('/save-question').all(VerifyAdmin).post(SaveQuestion);
 testRouter.route('/delete-question').all(VerifyAdmin).post(DeleteQuestion);
 testRouter.route('/:testID/update').all(VerifyAdmin).post(UpdateTest);
+testRouter.route('/:testID/delete').all(VerifyAdmin).post(DeleteTest);
 
 export default testRouter;

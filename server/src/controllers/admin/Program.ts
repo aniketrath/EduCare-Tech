@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import Collection from '../../model/Collection';
 import Program from '../../model/Program';
 import FileUpload from '../../utils/FileUpload';
+import fs from 'fs';
 
 export const AllPrograms = async (req: Request, res: Response) => {
 	const programs = await Program.find().populate('pdfs videos');
@@ -161,20 +162,23 @@ export const DeleteResourceByID = async (req: Request, res: Response) => {
 
 	const program = await Program.findById(id);
 	const resource = await Collection.findById(resourceID);
+
 	if (!program) {
 		return result(res, 404, 'Program not found');
-	} else if (!resource) {
-		return result(res, 404, 'Resource not found');
 	}
+	console.log(resourceID, program.videos);
 
-	if (resource.type === 'PDF') {
-		program.pdfs = program.pdfs.filter((pdf) => pdf.toString() !== resourceID);
-	} else {
-		program.videos = program.videos.filter((video) => video.toString() !== resourceID);
+	program.pdfs = program.pdfs.filter((pdf) => pdf._id.toString() !== resourceID);
+	program.videos = program.videos.filter((video) => video._id.toString() !== resourceID);
+
+	if (resource) {
+		try {
+			await fs.unlinkSync(__basedir + '/static/uploads/' + resource.link);
+		} catch (e) {}
+		await resource.remove();
 	}
 
 	await program.save();
-	await resource.remove();
 
 	return result(res, 200, 'Resource deleted successfully');
 };

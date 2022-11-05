@@ -14,5 +14,6 @@ testRouter.route('/responses/:testID').all(VerifyAdmin_1.default).get(Test_1.Tes
 testRouter.route('/save-question').all(VerifyAdmin_1.default).post(Test_1.SaveQuestion);
 testRouter.route('/delete-question').all(VerifyAdmin_1.default).post(Test_1.DeleteQuestion);
 testRouter.route('/:testID/update').all(VerifyAdmin_1.default).post(Test_1.UpdateTest);
+testRouter.route('/:testID/delete').all(VerifyAdmin_1.default).post(Test_1.DeleteTest);
 exports.default = testRouter;
 //# sourceMappingURL=Test.js.map

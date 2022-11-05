@@ -150,6 +150,24 @@ const getTestResponses = (id: string) => {
 	});
 };
 
+const deleteTest = (id: string) => {
+	return new Promise((resolve, reject) => {
+		Axios.post('/tests/' + id + '/delete')
+			.then((res) => {
+				store.dispatch(showAlert('Test deleted successfully.'));
+				resolve(res.data);
+			})
+			.catch((err) => {
+				if (err.response) {
+					store.dispatch(showAlert(err.response.data));
+				} else {
+					store.dispatch(showAlert('Unable to delete test. Please try again later.'));
+				}
+				console.log(err);
+			});
+	});
+};
+
 export {
 	getTests,
 	createTest,
@@ -158,4 +176,5 @@ export {
 	deleteQuestion,
 	saveQuestions,
 	getTestResponses,
+	deleteTest,
 };

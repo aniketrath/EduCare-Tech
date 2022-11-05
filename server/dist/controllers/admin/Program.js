@@ -16,6 +16,7 @@ exports.DeleteResourceByID = exports.DeleteProgramByID = exports.AddResources = 
 const Collection_1 = __importDefault(require("../../model/Collection"));
 const Program_1 = __importDefault(require("../../model/Program"));
 const FileUpload_1 = __importDefault(require("../../utils/FileUpload"));
+const fs_1 = __importDefault(require("fs"));
 const AllPrograms = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const programs = yield Program_1.default.find().populate('pdfs videos');
     return result(res, 200, programs.map((program) => ({
@@ -158,17 +159,17 @@ const DeleteResourceByID = (req, res) => __awaiter(void 0, void 0, void 0, funct
     if (!program) {
         return result(res, 404, 'Program not found');
     }
-    else if (!resource) {
-        return result(res, 404, 'Resource not found');
-    }
-    if (resource.type === 'PDF') {
-        program.pdfs = program.pdfs.filter((pdf) => pdf.toString() !== resourceID);
-    }
-    else {
-        program.videos = program.videos.filter((video) => video.toString() !== resourceID);
+    console.log(resourceID, program.videos);
+    program.pdfs = program.pdfs.filter((pdf) => pdf._id.toString() !== resourceID);
+    program.videos = program.videos.filter((video) => video._id.toString() !== resourceID);
+    if (resource) {
+        try {
+            yield fs_1.default.unlinkSync(__basedir + '/static/uploads/' + resource.link);
+        }
+        catch (e) { }
+        yield resource.remove();
     }
     yield program.save();
-    yield resource.remove();
     return result(res, 200, 'Resource deleted successfully');
 });
 exports.DeleteResourceByID = DeleteResourceByID;

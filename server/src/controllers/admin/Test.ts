@@ -141,6 +141,17 @@ export const UpdateTest = async (req: Request, res: Response) => {
 	return result(res, 200, 'Test updated successfully');
 };
 
+export const DeleteTest = async (req: Request, res: Response) => {
+	const { testID } = req.params;
+
+	const test = await Test.findById(testID);
+	if (!test) return result(res, 404, 'Test not found');
+
+	test.remove();
+
+	return result(res, 200, 'Test deleted successfully');
+};
+
 const result = (res: Response, status: number, data: string | number | object) => {
 	res.status(status).json(data);
 };

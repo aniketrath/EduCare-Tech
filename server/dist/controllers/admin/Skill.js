@@ -16,6 +16,7 @@ exports.DeleteResourceByID = exports.DeleteSkillByID = exports.AddResources = ex
 const Collection_1 = __importDefault(require("../../model/Collection"));
 const Skill_1 = __importDefault(require("../../model/Skill"));
 const FileUpload_1 = __importDefault(require("../../utils/FileUpload"));
+const fs_1 = __importDefault(require("fs"));
 const AllSkills = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const skills = yield Skill_1.default.find().populate('pdfs videos');
     return result(res, 200, skills.map((skill) => ({
@@ -158,17 +159,16 @@ const DeleteResourceByID = (req, res) => __awaiter(void 0, void 0, void 0, funct
     if (!skill) {
         return result(res, 404, 'Program not found');
     }
-    else if (!resource) {
-        return result(res, 404, 'Resource not found');
-    }
-    if (resource.type === 'PDF') {
-        skill.pdfs = skill.pdfs.filter((pdf) => pdf.toString() !== resourceID);
-    }
-    else {
-        skill.videos = skill.videos.filter((video) => video.toString() !== resourceID);
-    }
+    skill.pdfs = skill.pdfs.filter((pdf) => pdf._id.toString() !== resourceID);
+    skill.videos = skill.videos.filter((video) => video._id.toString() !== resourceID);
     yield skill.save();
-    yield resource.remove();
+    if (resource) {
+        try {
+            yield fs_1.default.unlinkSync(__basedir + '/static/uploads/' + resource.link);
+        }
+        catch (e) { }
+        yield resource.remove();
+    }
     return result(res, 200, 'Resource deleted successfully');
 });
 exports.DeleteResourceByID = DeleteResourceByID;

@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import Collection from '../../model/Collection';
 import Skill from '../../model/Skill';
 import FileUpload from '../../utils/FileUpload';
+import fs from 'fs';
 
 export const AllSkills = async (req: Request, res: Response) => {
 	const skills = await Skill.find().populate('pdfs videos');
@@ -163,18 +164,17 @@ export const DeleteResourceByID = async (req: Request, res: Response) => {
 	const resource = await Collection.findById(resourceID);
 	if (!skill) {
 		return result(res, 404, 'Program not found');
-	} else if (!resource) {
-		return result(res, 404, 'Resource not found');
 	}
-
-	if (resource.type === 'PDF') {
-		skill.pdfs = skill.pdfs.filter((pdf) => pdf.toString() !== resourceID);
-	} else {
-		skill.videos = skill.videos.filter((video) => video.toString() !== resourceID);
-	}
+	skill.pdfs = skill.pdfs.filter((pdf) => pdf._id.toString() !== resourceID);
+	skill.videos = skill.videos.filter((video) => video._id.toString() !== resourceID);
 
 	await skill.save();
-	await resource.remove();
+	if (resource) {
+		try {
+			await fs.unlinkSync(__basedir + '/static/uploads/' + resource.link);
+		} catch (e) {}
+		await resource.remove();
+	}
 
 	return result(res, 200, 'Resource deleted successfully');
 };

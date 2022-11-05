@@ -35,7 +35,7 @@ export default function Home() {
 			>
 				<Button onClick={() => navigate('/')} className='!bg-transparent px-0 py-0 hidden md:block'>
 					<Text className='color-gradient text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FF3333] to-[#D4BF00]'>
-						EduCare Tech
+						EduCareTech
 					</Text>
 				</Button>
 

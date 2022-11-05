@@ -29,7 +29,7 @@ export default function Landing() {
 			<Box horizontal className='justify-between px-9 py-3 items-center border-b border-b-dark/20'>
 				<Button onClick={() => navigate('/')} className='!bg-transparent px-0 py-0 '>
 					<Text className='color-gradient text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FF3333] to-[#D4BF00]'>
-						EduCare Tech
+						EduCareTech
 					</Text>
 				</Button>
 
@@ -54,8 +54,9 @@ export default function Landing() {
 				>
 					<Box className='w-full md:w-1/2 md:h-[80%] justify-center'>
 						<Box className='text-black'>
-							<Text className='text-5xl font-bold '>Education with care,</Text>
+							<Text className='text-5xl font-bold '>Education with Care,</Text>
 							<Text className='text-5xl font-bold'>through Technology</Text>
+							<Text className='text-5xl font-bold'>A path of Learning</Text>
 						</Box>
 						<Box className='text-dark mt-[7%]'>
 							<Text className='text-lg'>

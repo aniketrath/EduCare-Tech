@@ -8,7 +8,7 @@ import Box from '../../components/root/Box';
 import Button from '../../components/root/Button';
 import Text from '../../components/root/Text';
 import { useNavigate } from 'react-router-dom';
-import { SERVER_URL } from '../../utils/Consts';
+import { ServerURL } from '../../api/Axios';
 
 export default function Program() {
 	const navigate = useNavigate();
@@ -55,7 +55,7 @@ export default function Program() {
 									id={pdf.id}
 									title={pdf.title}
 									pdf
-									link={SERVER_URL + 'file/' + pdf.link}
+									link={ServerURL + 'file/' + pdf.link}
 									onDelete={onDelete}
 								/>
 							))}

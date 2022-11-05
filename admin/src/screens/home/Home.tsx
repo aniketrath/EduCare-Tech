@@ -32,7 +32,7 @@ export default function Home() {
 			<Box horizontal className='justify-between px-9 py-3 items-center border-b border-b-dark/20'>
 				<Button onClick={() => navigate('/')} className='!bg-transparent px-0 py-0 hidden md:block'>
 					<Text className='color-gradient text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FF3333] to-[#D4BF00]'>
-						EduCare Tech
+						EduCareTech
 					</Text>
 				</Button>
 

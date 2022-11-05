@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import Button from '../../components/root/Button';
 import { useNavigate } from 'react-router-dom';
-import { SERVER_URL } from '../../utils/Consts';
+import { ServerURL } from '../../api/Axios';
 
 export default function Collections() {
 	const navigate = useNavigate();
@@ -38,7 +38,7 @@ export default function Collections() {
 							id={pdf.id}
 							title={pdf.title}
 							pdf
-							link={SERVER_URL + 'file/' + pdf.link}
+							link={ServerURL + 'file/' + pdf.link}
 							onDelete={onDelete}
 						/>
 					))}

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
+import { ServerURL } from '../../api/Axios';
 import { getSkill } from '../../api/SkillsHelper';
 import Card from '../../components/module/CollectionCard';
 import Box from '../../components/root/Box';
 import Text from '../../components/root/Text';
-import { SERVER_URL } from '../../utils/Consts';
 
 export default function Skill() {
 	const { id } = useParams();
@@ -36,7 +36,7 @@ export default function Skill() {
 
 						<Box className='my-6 grid grid-cols-2 md:grid-cols-4 gap-3'>
 							{pdfs.map((pdf, index) => (
-								<Card key={index} title={pdf.title} pdf link={SERVER_URL + 'file/' + pdf.link} />
+								<Card key={index} title={pdf.title} pdf link={ServerURL + 'file/' + pdf.link} />
 							))}
 						</Box>
 					</>
