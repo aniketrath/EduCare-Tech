@@ -43,7 +43,7 @@ export default function Footer() {
 							</li>
 							<li>
 								<Button onClick={() => to('tests')} className='!bg-transparent text-dark px-0'>
-									<Text className='text-light'>Test</Text>
+									<Text className='text-light'>MCQs</Text>
 								</Button>
 							</li>
 						</ul>
@@ -51,7 +51,9 @@ export default function Footer() {
 				</Box>
 				<Box className='items-end justify-end'>
 					<Text className='text-2xl mb-3'>Contact Us</Text>
-					<Text>jyotieducaretech@gmail.com</Text>
+					<a href='mailto:someone@example.com' className='transform-none'>
+						<Text>jyotieducaretech@gmail.com</Text>
+					</a>
 				</Box>
 			</Box>
 		</footer>

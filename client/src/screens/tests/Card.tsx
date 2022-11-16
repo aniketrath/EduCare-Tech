@@ -54,15 +54,26 @@ export default function Card(props: TestUpcoming | TestOnGoing | TestPast) {
 	return (
 		<Button
 			onClick={onClick}
-			className='!bg-transparent hover:!bg-primary-dark w-full center relative h-[65px] max-w-[350px] text-dark '
+			className='!bg-transparent hover:!bg-primary-dark w-full center relative h-[70px] md:h-[65px]  text-dark '
 		>
-			<Box horizontal className='w-full h-full bg-white my-1 px-2 items-center rounded-md gap-2'>
-				<Box className='w-6  overflow-hidden drop-shadow-md'>
-					<Box className={`w-6 h-6 rounded-full ${getColor(props)}`}></Box>
+			<Box horizontal className='w-full h-full bg-white my-1 px-2 items-center rounded-md relative'>
+				<Box className='absolute left-2 w-6  overflow-hidden drop-shadow-md z-10'>
+					<Box
+						className={`w-6 h-6 rounded-full text-sm font-semibold center text-white ${getColor(
+							props
+						)}`}
+					>
+						{title[0] || 'T'}
+					</Box>
 				</Box>
 
-				<Box>
-					<Text className='text-center text-dark'>{title}</Text>
+				<Box className='ml-8'>
+					<Text className='text-center text-dark line-clamp-2 md:line-clamp-1 '>
+						{title} {title} {title} {title} {title} {title} {title} {title} {title} {title} {title}{' '}
+						{title} {title} {title} {title} {title} {title} {title} {title} {title} {title} {title}{' '}
+						{title} {title} {title} {title} {title} {title} {title} {title} {title} {title} {title}{' '}
+						{title} {title} {title} {title} {title} {title} {title} {title} {title}{' '}
+					</Text>
 				</Box>
 			</Box>
 		</Button>

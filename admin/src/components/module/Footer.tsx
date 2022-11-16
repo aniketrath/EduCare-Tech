@@ -43,7 +43,7 @@ export default function Footer() {
 							</li>
 							<li>
 								<Button onClick={() => to('tests')} className='!bg-transparent text-dark px-0'>
-									<Text className='text-light'>Test</Text>
+									<Text className='text-light'>MCQs</Text>
 								</Button>
 							</li>
 						</ul>

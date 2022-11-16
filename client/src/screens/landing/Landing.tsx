@@ -54,12 +54,12 @@ export default function Landing() {
 				>
 					<Box className='w-full md:w-1/2 md:h-[80%] justify-center'>
 						<Box className='text-black'>
-							<Text className='text-5xl font-bold '>Education with Care,</Text>
-							<Text className='text-5xl font-bold'>through Technology</Text>
-							<Text className='text-5xl font-bold'>A path of Learning</Text>
+							<Text className='text-3xl md:text-5xl font-bold '>Education with Care</Text>
+							<Text className='text-3xl md:text-5xl font-bold'>through Technology</Text>
+							<Text className='text-xl md:text-3xl font-semibold mt-[7%] '>A path of Learning</Text>
 						</Box>
-						<Box className='text-dark mt-[7%]'>
-							<Text className='text-lg'>
+						<Box className='text-dark mt-[1%]'>
+							<Text className='text-base md:text-lg text-justify'>
 								Learning is something that takes place daily by interacting with other people and
 								the world around us. Life often throws challenges at us, there may be hurdles to
 								overcome, sometimes we compare ourselves with others who perform better than us, but

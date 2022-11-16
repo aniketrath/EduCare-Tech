@@ -10,7 +10,6 @@ export default function AlertBar() {
 	const dispatch = useDispatch();
 
 	React.useEffect(() => {
-
 		const alertBar = document.querySelector('.alert-bar');
 
 		if (!alertBar) {
@@ -21,7 +20,7 @@ export default function AlertBar() {
 			alertBar.classList.add('show');
 			timer = setTimeout(() => {
 				dispatch(showAlert(''));
-			}, 5000);
+			}, 15000);
 		} else {
 			alertBar.classList.remove('show');
 		}
@@ -32,7 +31,7 @@ export default function AlertBar() {
 	return (
 		<Box
 			horizontal
-			className='fixed -bottom-[48px] left-0 w-full h-[40px] z-50 bg-black text-white px-4 items-center alert-bar'
+			className='fixed -bottom-[48px] left-0 w-full h-[40px] z-50 bg-green-500 text-white px-4 items-center alert-bar'
 		>
 			<Text className='text-white transition-all '>{alert}</Text>
 		</Box>

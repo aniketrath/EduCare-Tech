@@ -21,17 +21,17 @@ export default function Tests() {
 			<Box className='py-6 px-[4%]'>
 				<Box className='center py-2'>
 					<TextInput
-						className='w-[500px]'
+						className='w-max md:w-[500px] '
 						placeholder='Class-Subject-Chapter'
 						value={query}
 						onChange={(text) => dispatch(setSearchQuery(text))}
 					/>
 				</Box>
 				<Box horizontal className=' items-center justify-between'>
-					<Text className='text-xl font-medium capitalize'>Available Tests</Text>
+					<Text className='text-xl font-medium capitalize'>Available MCQs</Text>
 				</Box>
 
-				<Box className='my-6 grid grid-cols-2 md:grid-cols-4 gap-3'>
+				<Box className='my-6 grid grid-cols-1 md:grid-cols-3 gap-3'>
 					{tests.map((test, index) => {
 						if (test.title.toLowerCase().includes(query.toLowerCase())) {
 							return <Card key={index} title={test.title} id={test.id} upcoming />;

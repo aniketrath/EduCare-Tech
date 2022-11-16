@@ -50,54 +50,42 @@ export default function TestScreen() {
 					<Box className='w-11/12 h-[40vh] bg-white p-3 rounded-lg overflow-x-hidden overflow-y-scroll'>
 						<Text>{questions[selected].question}</Text>
 					</Box>
-					<Box className='gap-3 mt-[50px]'>
-						<Box
-							horizontal
-							className='items-center gap-3 w-min min-w-[300px] bg-white p-3 rounded-lg'
-						>
+					<Box className='gap-3 mt-[50px] w-[80%]'>
+						<Box horizontal className='items-center gap-3  w-full bg-white p-3 rounded-lg'>
 							<input
 								onChange={handleChange}
 								checked={questions[selected].answer === '1'}
 								type='radio'
 								value='1'
 							/>
-							<Text className='w-2/3'>{questions[selected].option1}</Text>
+							<Text>{questions[selected].option1}</Text>
 						</Box>
-						<Box
-							horizontal
-							className='items-center gap-3 w-min min-w-[300px] bg-white p-3 rounded-lg'
-						>
+						<Box horizontal className='items-center gap-3  w-full bg-white p-3 rounded-lg'>
 							<input
 								onChange={handleChange}
 								checked={questions[selected].answer === '2'}
 								type='radio'
 								value='2'
 							/>
-							<Text className='w-2/3'>{questions[selected].option2}</Text>
+							<Text>{questions[selected].option2}</Text>
 						</Box>
-						<Box
-							horizontal
-							className='items-center gap-3 w-min min-w-[300px] bg-white p-3 rounded-lg'
-						>
+						<Box horizontal className='items-center gap-3 w-full bg-white p-3 rounded-lg'>
 							<input
 								onChange={handleChange}
 								checked={questions[selected].answer === '3'}
 								type='radio'
 								value='3'
 							/>
-							<Text className='w-2/3'>{questions[selected].option3}</Text>
+							<Text>{questions[selected].option3}</Text>
 						</Box>
-						<Box
-							horizontal
-							className='items-center gap-3 w-min min-w-[300px] bg-white p-3 rounded-lg'
-						>
+						<Box horizontal className='items-center gap-3 w-full bg-white p-3 rounded-lg'>
 							<input
 								onChange={handleChange}
 								checked={questions[selected].answer === '4'}
 								type='radio'
 								value='4'
 							/>
-							<Text className='w-2/3'>{questions[selected].option4}</Text>
+							<Text>{questions[selected].option4}</Text>
 						</Box>
 					</Box>
 				</Box>
@@ -121,6 +109,7 @@ export default function TestScreen() {
 									key={index}
 									index={index + 1}
 									selected={selected === index}
+									completed={questions[index].answer ? true : false}
 									onClick={() => {
 										dispatch(setSelected(index));
 									}}
@@ -142,14 +131,19 @@ type QuestionSelectorProps = {
 	index: number;
 	onClick: () => void;
 	selected: boolean;
+	completed: boolean;
 };
 
-function QuestionSelector({ index, selected, onClick }: QuestionSelectorProps) {
+function QuestionSelector({ index, selected, completed, onClick }: QuestionSelectorProps) {
 	return (
 		<Button onClick={onClick} className='!bg-transparent px-0 py-0 w-full center'>
 			<Box
 				className={`w-[50px] aspect-square rounded-full border-2 border-dark center ${
-					selected ? 'bg-blue-500 text-light' : 'bg-white  text-dark'
+					selected
+						? 'bg-blue-500 text-light'
+						: completed
+						? 'bg-green-500 text-light'
+						: 'bg-white  text-dark'
 				}`}
 			>
 				<Text className='text-center'>{index}</Text>

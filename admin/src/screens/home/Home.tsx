@@ -69,7 +69,7 @@ export default function Home() {
 							contains('tests') ? 'underline underline-offset-4' : 'no-underline'
 						}`}
 					>
-						Test
+						MCQs
 					</Button>
 					<Button onClick={logout} className='!bg-transparent !text-dark font-medium '>
 						Logout
