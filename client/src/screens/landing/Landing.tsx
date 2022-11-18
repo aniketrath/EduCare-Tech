@@ -82,7 +82,7 @@ export default function Landing() {
 			<Box className=' px-[7%] py-[7%] bg-primary-dark'>
 				<Text className='text-4xl font-bold'>Mission</Text>
 				<Box className='text-dark mt-[3%]'>
-					<Text className='text-lg'>
+					<Text className='text-lg text-justify'>
 						Our platform aims for the children of deprived backgrounds to avail all opportunities to
 						grow equally like others , and also for the elderly to be technically self-sufficient ,
 						to connect , and be a part of the digital world in this modern era . We aim to spread
@@ -97,7 +97,7 @@ export default function Landing() {
 			<Box className=' px-[7%] py-[7%]'>
 				<Text className='text-4xl font-bold'>Vision</Text>
 				<Box className='text-dark mt-[3%]'>
-					<Text className='text-lg'>
+					<Text className='text-lg text-justify'>
 						Provide necessary support for children to grow in education, confidence and skills to
 						achieve their goal. Extend support to the elderly to carry out day to day digital
 						activities in the modern society We will be here for you every step of the way. Our
@@ -112,7 +112,7 @@ export default function Landing() {
 			<Box className=' px-[7%] py-[7%] bg-primary-dark'>
 				<Text className='text-4xl font-bold'>About</Text>
 				<Box className='text-dark mt-[3%]'>
-					<Text className='text-lg'>
+					<Text className='text-lg text-justify'>
 						An educational consultant, also called a higher education consultant, assists students
 						and their parents in planning for college and financial aid. EduCareTech is a digital
 						education support system working towards uplifting literacy and skills in deprived
