@@ -68,12 +68,7 @@ export default function Card(props: TestUpcoming | TestOnGoing | TestPast) {
 				</Box>
 
 				<Box className='ml-8'>
-					<Text className='text-center text-dark line-clamp-2 md:line-clamp-1 '>
-						{title} {title} {title} {title} {title} {title} {title} {title} {title} {title} {title}{' '}
-						{title} {title} {title} {title} {title} {title} {title} {title} {title} {title} {title}{' '}
-						{title} {title} {title} {title} {title} {title} {title} {title} {title} {title} {title}{' '}
-						{title} {title} {title} {title} {title} {title} {title} {title} {title}{' '}
-					</Text>
+					<Text className='text-center text-dark line-clamp-2 md:line-clamp-1 '>{title}</Text>
 				</Box>
 			</Box>
 		</Button>

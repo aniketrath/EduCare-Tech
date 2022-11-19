@@ -56,7 +56,7 @@ export default function Auth() {
 				<Box horizontal className='h-full  justify-between center'>
 					<Box className='w-1/2 h-[80%] justify-center'>
 						<Box className='text-black'>
-							<Text className='text-5xl font-bold '>Education with care,</Text>
+							<Text className='text-5xl font-bold '>Education with care</Text>
 							<Text className='text-5xl font-bold'>through Technology</Text>
 						</Box>
 						<Button

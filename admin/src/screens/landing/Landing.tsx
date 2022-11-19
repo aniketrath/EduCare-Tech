@@ -54,11 +54,11 @@ export default function Landing() {
 				>
 					<Box className='w-full md:w-1/2 md:h-[80%] justify-center'>
 						<Box className='text-black'>
-							<Text className='text-5xl font-bold '>Education with care,</Text>
+							<Text className='text-5xl font-bold '>Education with care</Text>
 							<Text className='text-5xl font-bold'>through Technology</Text>
 						</Box>
 						<Box className='text-dark mt-[7%]'>
-							<Text>
+							<Text className='text-justify'>
 								Reprehenderit duis minim nulla ea duis esse sunt laboris excepteur cupidatat qui
 								sunt mollit. Ullamco ipsum sit nulla excepteur magna laboris enim enim nostrud
 								nulla. Culpa cillum laborum est id. Ea nostrud cupidatat elit occaecat sunt culpa
